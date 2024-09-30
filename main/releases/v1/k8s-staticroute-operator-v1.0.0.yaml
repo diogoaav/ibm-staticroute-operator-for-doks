@@ -259,18 +259,17 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: static-route-operator
+  namespace: static-routes
 spec:
   selector:
     matchLabels:
       name: static-route-operator
   template:
     metadata:
-      annotations:
-        container.apparmor.security.beta.kubernetes.io/static-route-operator: unconfined
       labels:
         name: static-route-operator
     spec:
-      serviceAccountName: k8s-staticroute-operator
+      serviceAccountName: static-route-operator
       hostNetwork: true
       tolerations:
       - operator: Exists
