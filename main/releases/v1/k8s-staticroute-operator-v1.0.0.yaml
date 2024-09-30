@@ -278,9 +278,9 @@ spec:
         image: diogoaav/staticroute-operator:latest
         imagePullPolicy: Always
         securityContext:
-          privileged: true
-          runAsUser: 0
-          runAsGroup: 0
+          privileged: true  #requires elevated privilege 
+          runAsUser: 0      #requires elevated privilege 
+          runAsGroup: 0     #requires elevated privilege 
           capabilities:
             add:
             - NET_ADMIN
