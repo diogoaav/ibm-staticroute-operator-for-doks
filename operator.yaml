@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "5"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"name":"static-route-operator","namespace":"static-routes"},"spec":{"selector":{"matchLabels":{"name":"static-route-operator"}},"template":{"metadata":{"labels":{"name":"static-route-operator"}},"spec":{"containers":[{"env":[{"name":"OPERATOR_NAME","value":"static-route-operator"},{"name":"NODE_HOSTNAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}}],"image":"diogoaav/staticroute-operator:latest","imagePullPolicy":"Always","name":"static-route-operator","securityContext":{"capabilities":{"add":["NET_ADMIN"]},"privileged":true,"readOnlyRootFilesystem":true,"runAsGroup":0,"runAsNonRoot":false,"runAsUser":0}}],"hostNetwork":true,"serviceAccountName":"static-route-operator","tolerations":[{"operator":"Exists"}]}}}}
+  creationTimestamp: "2024-09-30T14:31:11Z"
+  generation: 5
+  name: static-route-operator
+  namespace: static-routes
+  resourceVersion: "8420"
+  uid: 706d3c41-d405-4697-8ccf-d9b3e91b652c
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      name: static-route-operator
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: static-route-operator
+    spec:
+      containers:
+      - env:
+        - name: OPERATOR_NAME
+          value: static-route-operator
+        - name: NODE_HOSTNAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: PROTECTED_SUBNET_TEST1
+          value: "1.1.1.1/32"
+        - name: PROTECTED_SUBNET_TEST2
+          value: "192.168.0.0/24"
+        image: diogoaav/staticroute-operator:latest
+        imagePullPolicy: Always
+        name: static-route-operator
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+          readOnlyRootFilesystem: true
+          runAsGroup: 0
+          runAsNonRoot: false
+          runAsUser: 0
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: static-route-operator
+      serviceAccountName: static-route-operator
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - operator: Exists
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 3
+  desiredNumberScheduled: 3
+  numberAvailable: 3
+  numberMisscheduled: 0
+  numberReady: 3
+  observedGeneration: 5
+  updatedNumberScheduled: 3
