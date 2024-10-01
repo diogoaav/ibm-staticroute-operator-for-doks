@@ -293,7 +293,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-#        - name: PROTECTED_SUBNET_TEST1
-#          value: "1.1.1.1/32"
-#        - name: PROTECTED_SUBNET_TEST2
-#          value: "192.168.0.0/24"
+        - name: PROTECTED_SUBNET_TEST1
+          value: "1.1.1.1/32"
+        - name: PROTECTED_SUBNET_TEST2
+          value: "192.168.0.0/24"

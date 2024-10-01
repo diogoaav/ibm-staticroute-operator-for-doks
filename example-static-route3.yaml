@@ -1,0 +1,8 @@
+apiVersion: static-route.ibm.com/v1
+kind: StaticRoute
+metadata:
+  name: example-static-route3
+  namespace: static-routes
+spec:
+  subnet: "8.8.8.8/32"
+  gateway: "10.108.0.53"
